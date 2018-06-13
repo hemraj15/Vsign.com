@@ -1,0 +1,53 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                      http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<parent>
+		<groupId>com.vsign.tech</groupId>
+		<artifactId>vsign.com</artifactId>
+		<version>1.0-SNAPSHOT</version>
+		<relativePath>../../pom.xml</relativePath>
+	</parent>
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.vsign.tech.auth</groupId>
+	<artifactId>auth</artifactId>
+	<packaging>jar</packaging>
+	<name>Authentication and Authorization Module</name>
+
+	<properties>
+		<spring.security.version>4.0.4.RELEASE</spring.security.version>
+		<spring.oauth2.version>2.0.5.RELEASE</spring.oauth2.version>
+		<jackson.mapper.version>1.9.13</jackson.mapper.version>
+	</properties>
+
+	<dependencies>
+		<!-- Assessment Data Dependency -->
+		<dependency>
+			<groupId>com.vsign.tech.data</groupId>
+			<artifactId>data</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<!-- Spring Security -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security.oauth</groupId>
+			<artifactId>spring-security-oauth2</artifactId>
+			<version>${spring.oauth2.version}</version>
+		</dependency>
+
+		<!-- Jackson Mapper -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>${jackson.mapper.version}</version>
+		</dependency>
+	</dependencies>
+
+</project>
