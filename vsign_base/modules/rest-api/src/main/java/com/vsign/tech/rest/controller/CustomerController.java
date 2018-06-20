@@ -38,6 +38,7 @@ import com.vsign.tech.rest.exception.OrderInitiateException;
 import com.vsign.tech.rest.exception.StatusException;
 import com.vsign.tech.rest.exception.UserNotFoundException;
 import com.vsign.tech.rest.form.GuestForm;
+import com.vsign.tech.rest.form.InitiateOrderForm;
 import com.vsign.tech.rest.model.ErrorResponse;
 import com.vsign.tech.rest.service.CustomerService;
 import com.vsign.tech.rest.service.VsignService;
@@ -315,26 +316,26 @@ public class CustomerController {
 
 	@ResponseBody
 	@RequestMapping(value = "/initiateOrder", method = RequestMethod.POST, consumes = "application/json")
-	public Object initiateOrder(@RequestParam Integer planId, @RequestParam String machineId,  	       
+	public Object initiateOrder(@RequestBody @Valid InitiateOrderForm form ,BindingResult result ,  	       
 	        HttpServletRequest request, HttpServletResponse response) {
 		//boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 		Map<String, Object> map = new HashMap<>();
 		Long orderId;
-		Long plansId = new Long(planId);
+		Long plansId = new Long(form.getPlanId());
 
 		Object data = null;
-		if (machineId == null) {
+		if (result.hasErrors()) {
+			String message = ErrorUtils.getTextValidationErrorMessage(result.getAllErrors());
 			data = new ErrorResponse();
-			((ErrorResponse) data)
-			        .setErrorCode(ErrorCodes.MACHINE_ID_CAN_NOT_BE_NULL);
-			((ErrorResponse) data).setMessage("Machine id is null while initiating order !");
+			((ErrorResponse) data).setErrorCode(message);
+			((ErrorResponse) data).setMessage("Form validation failed!");
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-		} else {
+		    } else {
 			try {
 				LOGGER.info("Placing order >>");
-				LOGGER.info("Initiating order for plan name :: : plan id :: "+planId);
-				map = vsignService.initiateOrder(machineId,plansId);
-				LOGGER.info("order initiated  successfully with planId id ::" + planId);
+				LOGGER.info("Initiating order for plan name :: : plan id :: "+plansId);
+				map = vsignService.initiateOrder(form.getMachineId(),plansId);
+				LOGGER.info("order initiated  successfully with planId id ::" + plansId);
 				//if(orderId !=null){
 					
 				
