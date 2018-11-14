@@ -26,6 +26,7 @@ import com.vsign.tech.data.dao.entity.TransacationOrder;
 import com.vsign.tech.data.exception.InstanceNotFoundException;
 import com.vsign.tech.rest.constant.CommonStatus;
 import com.vsign.tech.rest.constant.ErrorCodes;
+import com.vsign.tech.rest.exception.CustomerOrderNotFound;
 import com.vsign.tech.rest.exception.DatabaseException;
 import com.vsign.tech.rest.exception.EmptyListException;
 import com.vsign.tech.rest.exception.InvalidTransactionException;
@@ -140,7 +141,11 @@ public class PaymentServiceImpl implements PaymentService {
 
 		return map;
 	}
-
+/**
+ * @param trxOrderId
+ * 
+ * 
+ * */
 	private TransacationOrder getTrxOrderByTrxOrderId(Long trxOrderId) throws InstanceNotFoundException {
 		
 		return trxOrderDao.find(trxOrderId);
@@ -193,8 +198,8 @@ public class PaymentServiceImpl implements PaymentService {
 			if (trxObj !=null) {
 				
 				LOGGER.info("transaction found ::"+trxObj.getTransactionNo());
-				trxObj.setBankCode(completTrxForm.getBankCode());
-				trxObj.setBankRefNum(completTrxForm.getBankRefNum());
+				//trxObj.setBankCode(completTrxForm.getBankCode());
+				//trxObj.setBankRefNum(completTrxForm.getBankRefNum());
 				trxObj.setErrorCode(completTrxForm.getErrorCode());
 				trxObj.setErrorMessage(completTrxForm.getErrorMessage());
 				
@@ -209,7 +214,7 @@ public class PaymentServiceImpl implements PaymentService {
 				trxObj.setPaymentGatewayTrxId(completTrxForm.getPaymentGatewayTrxId());
 				trxObj.setPaymentMode(completTrxForm.getPaymentMode());
 				trxObj.setTrxStatus(completTrxForm.getTrxStatus());
-				trxObj.setPayYouMoneyId(completTrxForm.getPayYouMoneyId());
+				//trxObj.setPayYouMoneyId(completTrxForm.getPayYouMoneyId());
 				trxObj.setTrxMessage(completTrxForm.getTrxMessage());
 				trxObj.setNetAmountPaid(completTrxForm.getNetAmountPaid());
 			
@@ -299,6 +304,33 @@ public class PaymentServiceImpl implements PaymentService {
 	@Override
 	public Map<String, Object> initiateTransaction(Long orderId) throws DatabaseException,
 	        UserNotFoundException, OrderStatusException, InstanceNotFoundException {
+		
+		Map<String, Object> map = new HashMap<>();
+		CustOrder custOrd = new CustOrder();
+		Customer cust = null;
+		Long trxId=null;
+		TransacationOrder trxOrder=null;
+		CustomerTransaction trx = new CustomerTransaction();
+		try {
+			
+			custOrd =ordDao.find(orderId);
+			
+			if(custOrd != null){
+				
+				
+			}else {
+				
+				LOGGER.error("Error occured while fetching customer order from data base for orderId : "+orderId);
+				throw new CustomerOrderNotFound("Customer order could not be found in data base for order id : "+orderId,
+				        ErrorCodes.DATABASE_ERROR);
+			}
+			
+			
+		} catch (Exception e) {
+			LOGGER.error("Error occured while initiating CustOrder transaction  in database", e);
+			throw new DatabaseException("Error occured while initiating CustOrder transaction  in database",
+			        ErrorCodes.DATABASE_ERROR);
+		}
 		
 		return null;
 	}

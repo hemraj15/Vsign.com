@@ -1,7 +1,5 @@
 package com.vsign.tech.data;
 
-import java.math.BigDecimal;
-
 public class HelloWorld {
 
 	public static void main(String[] args) {

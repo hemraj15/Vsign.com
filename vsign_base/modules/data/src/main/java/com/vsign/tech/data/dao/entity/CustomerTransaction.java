@@ -6,6 +6,7 @@ package com.vsign.tech.data.dao.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,22 +29,24 @@ public class CustomerTransaction implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)	
+	
 	private Long transactionNo;
 	private String custEmailId;
 	private String custFirstName;
 	private String custLastName;
 	private Date transactonDate;
 	protected Date transactionUpdateDate;
+	
 	private Long paymentGatewayTrxId;
 	private Double amountToBePaid;
-	private String bankRefNum;
-	private String bankCode;
+	//private String bankRefNum;
+	//private String bankCode;
 	//private String cardNumber;
 	//private String cardType;
 	private Double discount;
 	private Double totalAmount;
-	private Long payYouMoneyId;
+	//private Long payYouMoneyId;
 	private String errorMessage;
 	private String errorCode;
 	//private String successMessage;
@@ -55,8 +58,77 @@ public class CustomerTransaction implements Serializable {
 	private Double netAmountPaid;
 	private String paymentMode;
 	private String custTrxAction;
+
+	private Double surcharge ;
+	private String prod;
+	private Long bank_txn;
+	private String f_code;
+	private String clientcode;
+	private String bankName;
+	//NB
+	private String discriminator;
+	private String CardNumber;
+	private String signature;
 	
 	
+	
+	
+	
+	
+	public String getProd() {
+		return prod;
+	}
+	public void setProd(String prod) {
+		this.prod = prod;
+	}
+	public Double getSurcharge() {
+		return surcharge;
+	}
+	public void setSurcharge(Double surcharge) {
+		this.surcharge = surcharge;
+	}
+	public Long getBank_txn() {
+		return bank_txn;
+	}
+	public void setBank_txn(Long bank_txn) {
+		this.bank_txn = bank_txn;
+	}
+	public String getF_code() {
+		return f_code;
+	}
+	public void setF_code(String f_code) {
+		this.f_code = f_code;
+	}
+	public String getClientcode() {
+		return clientcode;
+	}
+	public void setClientcode(String clientcode) {
+		this.clientcode = clientcode;
+	}
+	public String getBankName() {
+		return bankName;
+	}
+	public void setBankName(String bankName) {
+		this.bankName = bankName;
+	}
+	public String getDiscriminator() {
+		return discriminator;
+	}
+	public void setDiscriminator(String discriminator) {
+		this.discriminator = discriminator;
+	}
+	public String getCardNumber() {
+		return CardNumber;
+	}
+	public void setCardNumber(String cardNumber) {
+		CardNumber = cardNumber;
+	}
+	public String getSignature() {
+		return signature;
+	}
+	public void setSignature(String signature) {
+		this.signature = signature;
+	}
 	public String getErrorMessage() {
 		return errorMessage;
 	}
@@ -135,7 +207,7 @@ public class CustomerTransaction implements Serializable {
 	public void setAmountToBePaid(Double amount) {
 		this.amountToBePaid = amount;
 	}
-	public String getBankRefNum() {
+	/*public String getBankRefNum() {
 		return bankRefNum;
 	}
 	public void setBankRefNum(String string) {
@@ -146,7 +218,7 @@ public class CustomerTransaction implements Serializable {
 	}
 	public void setBankCode(String bankCode) {
 		this.bankCode = bankCode;
-	}
+	}*/
 	/*
 	public String getCardNumber() {
 		return cardNumber;
@@ -166,12 +238,12 @@ public class CustomerTransaction implements Serializable {
 	public void setDiscount(Double discount) {
 		this.discount = discount;
 	}
-	public Long getPayYouMoneyId() {
+	/*public Long getPayYouMoneyId() {
 		return payYouMoneyId;
 	}
 	public void setPayYouMoneyId(Long payYouMoneyId) {
 		this.payYouMoneyId = payYouMoneyId;
-	}
+	}*/
 	/**
 	 * @return the trxMessage
 	 */

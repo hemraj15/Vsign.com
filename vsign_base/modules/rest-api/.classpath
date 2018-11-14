@@ -29,5 +29,26 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/Hemraj/Downloads/guava-15.0-rc1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Hemraj/.m2/repository/commons-httpclient/commons-httpclient/3.1/commons-httpclient-3.1.jar">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="org.eclipse.jst.component.archivename" value="commons-httpclient-3.1.jar"/>
+			<attribute name="maven.groupId" value="commons-httpclient"/>
+			<attribute name="maven.artifactId" value="commons-httpclient"/>
+			<attribute name="maven.version" value="3.1"/>
+			<attribute name="maven.scope" value="compile"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Hemraj/.m2/repository/org/apache/httpcomponents/httpclient/4.3.5/httpclient-4.3.5.jar">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="org.eclipse.jst.component.archivename" value="httpclient-4.3.5.jar"/>
+			<attribute name="maven.groupId" value="org.apache.httpcomponents"/>
+			<attribute name="maven.artifactId" value="httpclient"/>
+			<attribute name="maven.version" value="4.3.5"/>
+			<attribute name="maven.scope" value="compile"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Hemraj/Downloads/apache-httpcomponents-httpcore.jar/apache-httpcomponents-httpcore.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

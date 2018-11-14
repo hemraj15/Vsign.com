@@ -1,11 +1,10 @@
-/**
- * 
- */
+
 package com.vsign.tech.rest.controller;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
@@ -35,6 +34,7 @@ import com.vsign.tech.rest.model.ErrorResponse;
 import com.vsign.tech.rest.service.CustomerService;
 import com.vsign.tech.rest.service.PaymentService;
 import com.vsign.tech.rest.utils.ErrorUtils;
+import com.vsign.tech.rest.utils.PayUMoneyIntegrationUtils;
 
 /**
  * @author Hemraj
@@ -62,6 +62,7 @@ public class PaymentController {
 			Map<String ,Object> map=new HashMap<>();
 			
 			map=paymentService.initiateTransaction(orderId);
+			
 			//map.put("test", "test");			
 			data=map;
 			
@@ -170,7 +171,7 @@ public class PaymentController {
 	
 	@ResponseBody
 	@RequestMapping(value="/cartTrxInitiate" ,method = RequestMethod.POST,consumes="application/json")
-	public Object initiateTransaction(@RequestBody TransacationOrderForm form ,BindingResult result,   HttpServletResponse response) {
+	public Object initiateTransaction(@RequestBody TransacationOrderForm form ,BindingResult result,HttpServletRequest request,   HttpServletResponse response) {
 		
 		Object data=null;
 		if (result.hasErrors()) {
@@ -190,7 +191,27 @@ public class PaymentController {
 			Map<String ,Object> map=new HashMap<>();
 			
 			map=paymentService.initiateCartTransaction(form);
-			//map.put("test", "test");			
+			//map.put("test", "test");
+			
+			
+			PayUMoneyIntegrationUtils kit = new PayUMoneyIntegrationUtils();
+			
+			request.setAttribute("txnid", map.get("tansactionId"));
+			request.setAttribute("txnid", map.get("transactionOrderId"));
+			request.setAttribute("txnid", map.get("transactionOrderId"));
+			request.setAttribute("txnid", map.get("transactionOrderId"));
+			request.setAttribute("txnid", map.get("transactionOrderId"));
+			request.setAttribute("txnid", map.get("transactionOrderId"));
+			request.setAttribute("txnid", map.get("transactionOrderId"));
+			request.setAttribute("txnid", map.get("transactionOrderId"));
+			request.setAttribute("txnid", map.get("transactionOrderId"));
+			request.setAttribute("txnid", map.get("transactionOrderId"));
+			request.setAttribute("txnid", map.get("transactionOrderId"));
+			request.setAttribute("txnid", map.get("transactionOrderId"));
+			request.setAttribute("txnid", map.get("transactionOrderId"));
+			request.setAttribute("txnid", map.get("transactionOrderId"));
+			
+			
 			data=map;
 			
 		} 
