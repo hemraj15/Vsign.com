@@ -3,19 +3,23 @@
  */
 package com.vsign.tech.rest.form;
 
-import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 /**
  * @author Hemraj
  *
  */
+@JsonInclude(Include.NON_EMPTY)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class PaymentResponseForm {
 	private Long mmp_txn;
 	private Long mer_txn;
 	private Double amt;
 	private Double surcharge;
 	private String prod;
-	private Date date;
+	private String date;
 	private Long bank_txn;
 	private String f_code;
 	private String clientcode;
@@ -30,8 +34,15 @@ public class PaymentResponseForm {
 	private Long udf5;
 	private Long udf6;
 	private String udf9;
+	private String desc;
 	
 	
+	public String getDesc() {
+		return desc;
+	}
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
 	public Long getMmp_txn() {
 		return mmp_txn;
 	}
@@ -62,10 +73,10 @@ public class PaymentResponseForm {
 	public void setProd(String prod) {
 		this.prod = prod;
 	}
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 	public Long getBank_txn() {

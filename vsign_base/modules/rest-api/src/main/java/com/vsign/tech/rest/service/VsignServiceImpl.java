@@ -711,6 +711,7 @@ public class VsignServiceImpl implements VsignService {
 				
 				ordId=ordDao.save(ord);
 				map.put("orderId", ordId);
+				map.put("planDetails", plan);
 				
 					}
 			}

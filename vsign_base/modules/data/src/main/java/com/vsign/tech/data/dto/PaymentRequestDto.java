@@ -9,7 +9,7 @@ package com.vsign.tech.data.dto;
  */
 public class PaymentRequestDto {
 
-	private Long login;
+	private String login;
 	private String pass;
 	private String ttype;
 	private String prodid;
@@ -33,10 +33,10 @@ public class PaymentRequestDto {
 	private String udf9;
 	
 	
-	public Long getLogin() {
+	public String getLogin() {
 		return login;
 	}
-	public void setLogin(Long login) {
+	public void setLogin(String login) {
 		this.login = login;
 	}
 	public String getPass() {

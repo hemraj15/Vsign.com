@@ -336,6 +336,7 @@ public class CustomerController {
 				LOGGER.info("Initiating order for plan name :: : plan id :: "+plansId);
 				map = vsignService.initiateOrder(form.getMachineId(),plansId);
 				LOGGER.info("order initiated  successfully with planId id ::" + plansId);
+				LOGGER.info("order initiated  successfully with planId id ::" + map.get("orderId"));
 				//if(orderId !=null){
 					
 				

@@ -508,7 +508,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 			Iterator<CustOrder> itr = custOrders.iterator();
 			if (trxOrder != null && successCode != null
-			        && successCode.equalsIgnoreCase("success")) {
+			        && successCode.equalsIgnoreCase("ok")) {
 
 				trxOrder.setStatus(CommonStatus.COMPLETE.toString());
 				trxOrderDao.update(trxOrder);

@@ -43,6 +43,7 @@ public class PasswordController {
 		Object data = null;
 
 		try {
+			LOGGER.info("emailToken : "+PasswordUtils.encode(emailId));
 			userService.sendForgotPasswordLink(emailId);
 			Map<String, Object> dataMap = new HashMap<>();
 			dataMap.put("message", "forgot email sent successfully to user!");

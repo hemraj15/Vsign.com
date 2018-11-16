@@ -1,20 +1,12 @@
 package com.vsign.tech.rest;
 
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
-
-
-import org.apache.http.client.utils.URIBuilder;
 
 public class HelloWorld {
 
@@ -37,6 +29,11 @@ public class HelloWorld {
 		
 		System.out.println("Date after parsing : "+format);
 		
+		
+		Date sample =new Date();
+		
+		System.out.println("HelloWorld.main() " + new SimpleDateFormat("dd/mm/yyyy HH:mm:ss").format(sample) );
+		
 	/*	
 		URIBuilder builder = new URIBuilder() ;
 				builder.setScheme("https") ;
@@ -58,7 +55,7 @@ public class HelloWorld {
 					e.printStackTrace();
 				}*/
 		
-				 try {
+				 /*try {
 					URI uri = new URIBuilder()
 					            .setScheme("http")
 					            .setHost("www.google.com")
@@ -79,6 +76,6 @@ public class HelloWorld {
 				} catch (URISyntaxException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
+				}*/
 	}
 }
