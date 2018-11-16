@@ -60,9 +60,6 @@ import com.vsign.tech.rest.exception.TransactionOrderNotFoundException;
 import com.vsign.tech.rest.exception.UserNotFoundException;
 import com.vsign.tech.rest.form.GuestForm;
 import com.vsign.tech.rest.utils.CommonUtils;
-import com.google.common.hash.HashCode;
-import com.google.common.hash.HashFunction;
-import com.google.common.hash.Hashing;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
