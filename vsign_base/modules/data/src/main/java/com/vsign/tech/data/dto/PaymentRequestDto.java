@@ -13,7 +13,7 @@ public class PaymentRequestDto {
 	private String pass;
 	private String ttype;
 	private String prodid;
-	private Double amt;
+	private String amt;
 	private String txncurr;
 	private Double txnscamt;
 	private String clientcode;
@@ -57,10 +57,10 @@ public class PaymentRequestDto {
 	public void setProdid(String prodid) {
 		this.prodid = prodid;
 	}
-	public Double getAmt() {
+	public String getAmt() {
 		return amt;
 	}
-	public void setAmt(Double amt) {
+	public void setAmt(String amt) {
 		this.amt = amt;
 	}
 	public String getTxncurr() {

@@ -3,6 +3,7 @@
  */
 package com.vsign.tech.rest.service;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -358,9 +359,9 @@ public class PaymentServiceImpl implements PaymentService {
 				trx.setTransactonDate(new Date());
 
 				trxId = paymentDao.save(trx);
-
+				LOGGER.error("new transaction id created : "+trxId);
 				payDto = new PaymentRequestDto();
-				payDto.setAmt(custOrd.getOrderPrice());
+				
 				payDto.setClientcode(getCustNameBase64Format(cust.getFirstName()));
 				payDto.setCustacc(SignatureConst.custacc);
 
@@ -369,7 +370,11 @@ public class PaymentServiceImpl implements PaymentService {
 				payDto.setPass(SignatureConst.Password);
 				payDto.setProdid(SignatureConst.prod_id);
 				payDto.setRu(SignatureConst.ru);
-				payDto.setSignature(generateRequestSignature(trxId, custOrd.getOrderPrice()));
+				DecimalFormat df = new DecimalFormat("####0.00");
+			     String amount= df.format(custOrd.getOrderPrice());
+			     LOGGER.error("amount after format : "+amount);
+				payDto.setSignature(generateRequestSignature(trxId,amount ));
+				payDto.setAmt(amount);
 				payDto.setTtype(SignatureConst.ttype);
 				payDto.setTxncurr(SignatureConst.txncurr);
 				payDto.setTxnid(trxId);
@@ -401,11 +406,30 @@ public class PaymentServiceImpl implements PaymentService {
 	 * @param trxId
 	 * @param amt
 	 */
-	private String generateRequestSignature(Long trxId, Double amt) {
-
-		String signature = SignatureGenerate.getEncodedValueWithSha2(SignatureConst.ReqHashKey, SignatureConst.login_id,
-				SignatureConst.Password, SignatureConst.ttype, SignatureConst.prod_id, String.valueOf(trxId),
-				String.valueOf(amt), SignatureConst.txncurr);
+	private String generateRequestSignature(Long trxId, String amt) {
+ //reqHashKey, login, pass, ttype, prodid, txnid, amt, txncurr
+		
+		LOGGER.info("transaction id : "+trxId+" amount : "+amt);
+		        String login = SignatureConst.login_id;
+				String pass = SignatureConst.Password;
+				
+				String ttype = SignatureConst.ttype;
+				String prodid = SignatureConst.prod_id;
+				//Long txnid = 50l;
+				//Double amt = 0.0;
+				/*DecimalFormat df = new DecimalFormat("####0.00");
+			     String amount= df.format(amt);*/
+				String txncurr = SignatureConst.txncurr;
+				String reqHashKey = SignatureConst.ReqHashKey;
+				// login,pass,ttype,prodid,txnid,amt,txncurr
+				//getEncodedValueWithSha2(reqHashKey, login,pass,ttype,prodid,txnid,amt,txncurr);
+				LOGGER.info(" login = "+login+" pass = "+pass+" ttype = "+ttype+" prodId = "+prodid+" txnid = "+trxId+" amt = "+amt+" txncurr = "+txncurr+" reqHashKey = "+reqHashKey );
+				String signature = SignatureGenerate.getEncodedValueWithSha2(reqHashKey, login, pass, ttype, prodid, trxId.toString(), amt, txncurr);
+				LOGGER.info("Request signature ::" + signature);
+		/*
+		String signature = SignatureGenerate.getEncodedValueWithSha2(SignatureConst.ReqHashKey.toString(), SignatureConst.login_id.toString(),
+				SignatureConst.Password.toString(), SignatureConst.ttype.toString(), SignatureConst.prod_id.toString(), trxId.toString(),
+				amt.toString(), SignatureConst.txncurr.toString());*/
 		return signature;
 	}
 

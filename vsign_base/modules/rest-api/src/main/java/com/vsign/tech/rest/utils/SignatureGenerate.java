@@ -5,6 +5,13 @@ import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.vsign.tech.rest.service.PaymentServiceImpl;
+
+import bsh.This;
+
 /**
  * @author Hemraj
  *
@@ -13,6 +20,7 @@ public class SignatureGenerate {
 	/*
 	 * Hashing using key with HMACSHA512
 	 */
+	private static Logger LOGGER = LoggerFactory.getLogger(This.class);
 	public static byte[] encodeWithHMACSHA2(String text, String keyString) throws UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException {
 		java.security.Key sk = new javax.crypto.spec.SecretKeySpec(keyString.getBytes("UTF-8"), "HMACSHA512");
 		javax.crypto.Mac mac = javax.crypto.Mac.getInstance(sk.getAlgorithm());
@@ -49,11 +57,11 @@ public class SignatureGenerate {
 			sb.append(s);
 		}
 		try {
-			System.out.println("[getEncodedValueWithSha2]String to Encode =" + sb.toString());
+			LOGGER.info("[getEncodedValueWithSha2]String to Encode =" + sb.toString());
 			resp = byteToHexString(encodeWithHMACSHA2(sb.toString(), hashKey));
 			// resp = URLEncoder.encode(resp,"UTF-8");
 		} catch (Exception e) {
-			System.out.println("[getEncodedValueWithSha2]Unable to encocd value with key :" + hashKey + " and input :"
+			LOGGER.info("[getEncodedValueWithSha2]Unable to encocd value with key :" + hashKey + " and input :"
 					+ sb.toString());
 			e.printStackTrace();
 		}
@@ -68,8 +76,8 @@ public class SignatureGenerate {
 		String pass = "Test@123";
 		String ttype = "NBFundTransfer";
 		String prodid = "NSE";
-		String txnid = "7";
-		String amt = "100.00";
+		String txnid = "30";
+		String amt = "0";
 		String txncurr = "INR";
 		String reqHashKey = "KEY123657234";
 		// login,pass,ttype,prodid,txnid,amt,txncurr

@@ -5,9 +5,10 @@ package com.vsign.tech.rest.utils;
  *
  */
 public class SignatureConst {
-	private static final String merchant_url = "https://paynetzuat.atomtech.in/paynetz/epi/fts";
+	
 
 	public static final String login_id = "197";
+	private static final String merchant_url = "https://paynetzuat.atomtech.in/paynetz/epi/fts";
 
 	public static final String Password = "Test@123";
 

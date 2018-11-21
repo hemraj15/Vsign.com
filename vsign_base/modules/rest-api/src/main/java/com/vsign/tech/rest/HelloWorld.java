@@ -1,5 +1,6 @@
 package com.vsign.tech.rest;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -7,6 +8,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
+
+import com.vsign.tech.rest.utils.SignatureConst;
+import com.vsign.tech.rest.utils.SignatureGenerate;
 
 public class HelloWorld {
 
@@ -77,5 +81,37 @@ public class HelloWorld {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}*/
+		
+		int i=0;
+		
+		System.out.println("hjdgvchd : "+String.valueOf(i));
+		
+		System.out.println(" ================ ");
+		
+		//String login = "197";
+		//String pass = "Test@123";
+		//String ttype = "NBFundTransfer";
+		//String prodid = "NSE";
+		//String txnid = "30";
+		//String amt = "0";
+		//String txncurr = "INR";
+		//String reqHashKey = "KEY123657234";
+		String login = SignatureConst.login_id;
+		String pass = SignatureConst.Password;
+		
+		String ttype = SignatureConst.ttype;
+		String prodid = SignatureConst.prod_id;
+		Long txnid = 50l;
+		Double amt = 0.0;
+		DecimalFormat df = new DecimalFormat("####0.00");
+	     String amount= df.format(amt);
+		String txncurr = SignatureConst.txncurr;
+		String reqHashKey = SignatureConst.ReqHashKey;
+		// login,pass,ttype,prodid,txnid,amt,txncurr
+		//getEncodedValueWithSha2(reqHashKey, login,pass,ttype,prodid,txnid,amt,txncurr);
+		System.out.println(" login = "+login+" pass = "+pass+" ttype = "+ttype+" prodId = "+prodid+" txnid = "+txnid+" amt = "+amount+" txncurr = "+txncurr+" reqHashKey = "+reqHashKey );
+		String signature_request = SignatureGenerate.getEncodedValueWithSha2(reqHashKey, login, pass, ttype, prodid, txnid.toString(), amount, txncurr);
+		System.out.println("Request signature ::" + signature_request);
+		
 	}
 }

@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
  *
  */
 @JsonInclude(Include.NON_EMPTY)
+@JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PaymentResponseForm {
 	private Long mmp_txn;
@@ -35,6 +36,7 @@ public class PaymentResponseForm {
 	private Long udf6;
 	private String udf9;
 	private String desc;
+	private String ipg_txn_id;
 	
 	
 	public String getDesc() {
@@ -162,6 +164,12 @@ public class PaymentResponseForm {
 	}
 	public void setUdf9(String udf9) {
 		this.udf9 = udf9;
+	}
+	public String getIpg_txn_id() {
+		return ipg_txn_id;
+	}
+	public void setIpg_txn_id(String ipg_txn_id) {
+		this.ipg_txn_id = ipg_txn_id;
 	}
 	
 	
