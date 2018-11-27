@@ -3,6 +3,7 @@
  */
 package com.vsign.tech.rest.service;
 
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -41,6 +42,7 @@ import com.vsign.tech.rest.exception.UserNotFoundException;
 import com.vsign.tech.rest.form.PaymentResponseForm;
 import com.vsign.tech.rest.form.TransacationOrderForm;
 import com.vsign.tech.rest.form.TransactionResponseForm;
+import com.vsign.tech.rest.utils.CommonUtils;
 import com.vsign.tech.rest.utils.SignatureConst;
 import com.vsign.tech.rest.utils.SignatureGenerate;
 
@@ -322,7 +324,7 @@ public class PaymentServiceImpl implements PaymentService {
 
 	@Override
 	@Transactional
-	public Object initiateTransaction(Long orderId)
+	public PaymentRequestDto initiateTransaction(Long orderId)
 			throws DatabaseException, UserNotFoundException, OrderStatusException, InstanceNotFoundException {
 
 		Map<String, Object> map = new HashMap<>();
@@ -439,4 +441,24 @@ public class PaymentServiceImpl implements PaymentService {
 		return new String(bytesEncoded);
 	}
 
+	/*@Override
+	public String executeGetCall(){}*/
+
+	@Override
+	public String processPayment(PaymentRequestDto dto) {
+		String urlParams= "";
+		urlParams = urlParams+ dto.getAmt()+dto.getClientcode()+dto.getDate()+dto.getLogin()+dto.getMdd()+dto.getPass()+dto.getProdid()
+		+dto.getRu()+dto.getSignature()+dto.getTtype()+dto.getTxncurr()+dto.getUdf1()+dto.getUdf2()+dto.getUdf4()+dto.getUdf9();		
+		
+		try {
+			urlParams= CommonUtils.processPaymentGet(SignatureConst.merchant_url, dto);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return urlParams;
+	}
+	
+	
+	
 }

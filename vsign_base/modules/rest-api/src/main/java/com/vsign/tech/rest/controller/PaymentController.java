@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.vsign.tech.data.dto.PaymentRequestDto;
 import com.vsign.tech.data.exception.InstanceNotFoundException;
 import com.vsign.tech.rest.constant.ErrorCodes;
 import com.vsign.tech.rest.exception.DatabaseException;
@@ -53,15 +54,19 @@ public class PaymentController {
 	@ResponseBody
 	@RequestMapping(value = "/trxInitiate", method = RequestMethod.GET)
 	public Object initiateTransaction(@RequestParam("orderId") long orderId, HttpServletResponse response) {
+		PaymentRequestDto dto = null;
 		Object data = null;
 		Long id = orderId;
+		String paymentResponse ="";
 		try {
 
-			data = paymentService.initiateTransaction(id);
+			dto = paymentService.initiateTransaction(id);
 
 			// map.put("test", "test");
 			// data=map;
-
+			paymentResponse = paymentService.processPayment(dto);
+			data = paymentResponse;
+			LOGGER.info("Congratulations gateway call is success full ");
 		}
 
 		catch (DatabaseException e) {
