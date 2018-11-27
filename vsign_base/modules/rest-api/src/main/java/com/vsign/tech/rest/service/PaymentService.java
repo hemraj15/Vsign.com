@@ -5,6 +5,7 @@ package com.vsign.tech.rest.service;
 
 import java.util.Map;
 
+import com.vsign.tech.data.dto.PaymentRequestDto;
 import com.vsign.tech.data.exception.InstanceNotFoundException;
 import com.vsign.tech.rest.exception.DatabaseException;
 import com.vsign.tech.rest.exception.EmptyListException;
@@ -21,7 +22,7 @@ import com.vsign.tech.rest.form.TransactionResponseForm;
  */
 public interface PaymentService {
 
-	Object initiateTransaction(Long orderId) throws DatabaseException,UserNotFoundException,OrderStatusException,InstanceNotFoundException ;
+	PaymentRequestDto initiateTransaction(Long orderId) throws DatabaseException,UserNotFoundException,OrderStatusException,InstanceNotFoundException ;
 
 	Map<String, Object> transactionComplete(PaymentResponseForm paymentRespForm) throws DatabaseException, InvalidTransactionException, InstanceNotFoundException;
 

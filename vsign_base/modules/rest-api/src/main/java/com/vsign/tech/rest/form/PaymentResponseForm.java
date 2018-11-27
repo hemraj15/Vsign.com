@@ -11,8 +11,8 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
  * @author Hemraj
  *
  */
-@JsonInclude(Include.NON_EMPTY)
-@JsonInclude(Include.NON_NULL)
+//@JsonInclude(Include.NON_EMPTY)
+@JsonInclude(value=Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PaymentResponseForm {
 	private Long mmp_txn;
@@ -163,7 +163,7 @@ public class PaymentResponseForm {
 		return udf9;
 	}
 	public void setUdf9(String udf9) {
-		this.udf9 = udf9;
+		this.udf9 = "Vsign Licence System";
 	}
 	public String getIpg_txn_id() {
 		return ipg_txn_id;

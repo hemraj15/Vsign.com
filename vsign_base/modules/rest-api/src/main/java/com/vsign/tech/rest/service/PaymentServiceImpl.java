@@ -322,7 +322,7 @@ public class PaymentServiceImpl implements PaymentService {
 
 	@Override
 	@Transactional
-	public Object initiateTransaction(Long orderId)
+	public PaymentRequestDto initiateTransaction(Long orderId)
 			throws DatabaseException, UserNotFoundException, OrderStatusException, InstanceNotFoundException {
 
 		Map<String, Object> map = new HashMap<>();
@@ -381,6 +381,17 @@ public class PaymentServiceImpl implements PaymentService {
 				payDto.setUdf1(cust.getFirstName());
 				payDto.setUdf2(cust.getEmail());
 				payDto.setUdf3(cust.getContactNumber());
+				payDto.setUdf3(cust.getContactNumber());
+				payDto.setUdf4(cust.getAddress().getHouseNo()+" ,"+cust.getAddress().getStreetNo()+" ,"+cust.getAddress().getArea()+" ,"+cust.getAddress().getPinCode());
+				payDto.setMdd("NA");
+				
+				payDto.setUdf5(111111l);
+				
+				payDto.setUdf6(0l);
+				
+				payDto.setUdf9("Vsign Licence Service");
+				
+				
 				
 				//map.put("paymentRequestData", payDto);
 				

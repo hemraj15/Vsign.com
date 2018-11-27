@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.vsign.tech.data.dto.PaymentRequestDto;
 import com.vsign.tech.data.exception.InstanceNotFoundException;
 import com.vsign.tech.rest.constant.ErrorCodes;
 import com.vsign.tech.rest.exception.DatabaseException;
@@ -53,14 +54,16 @@ public class PaymentController {
 	@ResponseBody
 	@RequestMapping(value = "/trxInitiate", method = RequestMethod.GET)
 	public Object initiateTransaction(@RequestParam("orderId") long orderId, HttpServletResponse response) {
-		Object data = null;
+		PaymentRequestDto dto = null;
+		Object data=null;
 		Long id = orderId;
 		try {
 
-			data = paymentService.initiateTransaction(id);
+			dto = paymentService.initiateTransaction(id);
 
 			// map.put("test", "test");
 			// data=map;
+			data=dto;
 
 		}
 
@@ -122,9 +125,9 @@ public class PaymentController {
 				LOGGER.info("Placing order >>");
 
 				String licenseKey = custService.confirmOrder(trxOrderId, paymentRespForm.getF_code());
-				map.put("licence key : ", licenseKey);
+				map.put("licenceKey", licenseKey);
 
-				map.put("message : ", "order has been completed succssfully for transaction order id :" + trxOrderId);
+				map.put("message", "order has been completed succssfully for transaction order id :" + trxOrderId);
 				data = map;
 
 			} catch (InstanceNotFoundException e) {
